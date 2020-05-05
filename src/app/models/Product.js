@@ -17,17 +17,52 @@ module.exports = {
             RETURNING id
         `
 
+        data.price = data.price.replace(/\D/g,"")
+
         const values = [
             data.category_id,
-            1,
+            data.user_id || 1,
+            data.name,
+            data.description,
+            data.old_price || data.price,
+            data.price,
+            data.quantity,
+            data.status || 1,
+        ]
+
+        return db.query(query,values)
+    },
+    find(id){
+        return db.query('SELECT * FROM products WHERE id = $1', [id])
+    },
+    update(data){
+        const query = `
+            UPDATE products SET
+                category_id=($1),
+                name=($2),
+                description=($3),
+                old_price=($4),
+                price=($5),
+                quantity=($6),
+                status=($7)
+            WHERE id = $8
+        `
+
+        const values = [
+            data.category_id,
             data.name,
             data.description,
             data.old_price,
             data.price,
             data.quantity,
-            data.status,
+            data.status ,
+            data.id
         ]
 
         return db.query(query,values)
+
+    },
+    delete(id){
+        return db.query('DELETE FROM products WHERE id = $1',[id] )
     }
 }
