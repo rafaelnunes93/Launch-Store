@@ -22,7 +22,7 @@
     <div class="item">
         <div>Descrição:</div>
         <div>
-            <textarea name="description">{{product.name}}</textarea>
+            <textarea name="description">{{product.description}}</textarea>
         </div>
     </div>
 
@@ -33,7 +33,20 @@
                 <input id="photos-input" type="file" name="photos" multiple="multiple" accept="image/*" onChange="PhotosUpload.handleFileInput(event)">
                 <p>Selecioe ate 6 Fotos</p>
             </div>
-            <div id="photos-preview"></div>
+            <div id="photos-preview">
+             {%if files%}
+                {%for image in files %}
+                    <div class="photo" id="{{image.id}}">
+                        <img src="{{image.src}}" alt="">
+                        <i class="material-icons"
+                            onClick="PhotosUpload.removeOldPhoto(event)"
+                        >delete</i>
+                    </div>
+                {% endfor %}
+                <input type="hidden" name="removed_files" >
+             {%endif%}
+            
+            </div>
 
         </div>
 
