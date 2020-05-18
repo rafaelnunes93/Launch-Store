@@ -1,5 +1,7 @@
 <div class="item">
-    <div>Categoria</div>
+    <div>
+        Categoria
+    </div>
     <div>
         <select name="category_id">
             {%for category in categories %}}
@@ -30,53 +32,51 @@
         <div>Fotos:</div>
         <div>
             <div id="photos-upload">
-                <input id="photos-input" type="file" name="photos" multiple="multiple" accept="image/*" onChange="PhotosUpload.handleFileInput(event)">
+                <input id="photos-input" type="file" name="photos" multiple="multiple" accept="image/*" onchange="PhotosUpload.handleFileInput(event)">
                 <p>Selecioe ate 6 Fotos</p>
             </div>
             <div id="photos-preview">
-             {%if files%}
-                {%for image in files %}
-                    <div class="photo" id="{{image.id}}">
-                        <img src="{{image.src}}" alt="">
-                        <i class="material-icons"
-                            onClick="PhotosUpload.removeOldPhoto(event)"
-                        >delete</i>
-                    </div>
-                {% endfor %}
-                <input type="hidden" name="removed_files" >
-             {%endif%}
-            
+                {%if files%}
+                    {%for image in files %}
+                        <div class="photo" id="{{image.id}}">
+                            <img src="{{image.src}}" alt="">
+                            <i class="material-icons" onclick="PhotosUpload.removeOldPhoto(event)">delete</i>
+                        </div>
+                    {% endfor %}
+                    <input type="hidden" name="removed_files">
+                    {%endif%}
+
+                </div>
+
             </div>
 
         </div>
 
-    </div>
-
-    {# Campo de foto  #}
-
-    <div class="item">
-        <div>Valor:</div>
-        <div>
-            <input type="text" name="price" placeholder="Preco do Produto" value="{{product.price}}" onkeydown="Mask.apply(this,'formatBRL')">
-        </div>
-        {% if product.old_price%}
-            <input type="hidden" name="old_price" values="{{product.old_price}}">
-            {%endif%}
-        </div>
+        {# Campo de foto  #}
 
         <div class="item">
-            <div>Quantidade:</div>
+            <div>Valor:</div>
             <div>
-                <input type="number" name="quantity" placeholder="Estoque Disponivel" value="{{product.quantity}}">
+                <input type="text" name="price" placeholder="Preco do Produto" value="{{product.price}}" onkeydown="Mask.apply(this,'formatBRL')">
             </div>
-        </div>
+            {% if product.old_price%}
+                <input type="hidden" name="old_price" values="{{product.old_price}}">
+                {%endif%}
+            </div>
 
-        {%if (product.status == '1') or (product.status == '0')%}
             <div class="item">
-                <div>Disponivel</div>
+                <div>Quantidade:</div>
                 <div>
-                    <span><input type="radio" name="status" value="1" {% if product.status == '1'%} checked="checked" {% endif %}>Sim</span>
-                    <span><input type="radio" name="status" value="0" {% if product.status == '0'%} checked="checked" {% endif %}>Não</span>
+                    <input type="number" name="quantity" placeholder="Estoque Disponivel" value="{{product.quantity}}">
                 </div>
             </div>
-            {%endif%}
+
+            {%if (product.status == '1') or (product.status == '0')%}
+                <div class="item">
+                    <div>Disponivel</div>
+                    <div>
+                        <span><input type="radio" name="status" value="1" {% if product.status == '1'%} checked="checked" {% endif %}>Sim</span>
+                        <span><input type="radio" name="status" value="0" {% if product.status == '0'%} checked="checked" {% endif %}>Não</span>
+                    </div>
+                </div>
+                {%endif%}
