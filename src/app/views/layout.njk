@@ -7,10 +7,11 @@
             <title>Launch Store</title>
         {% endblock %}
 
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link rel="stylesheet" href="/styles.css">
+        {% include "parts/styles.njk" %}
     </head>
     <body>
+
+         {% include "parts/mensages.njk" %}
 
         {% include "parts/header.njk" %}
        
