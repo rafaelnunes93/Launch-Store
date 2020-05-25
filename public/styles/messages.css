@@ -22,3 +22,8 @@
     background-color: #e74c3c;
     top: 0;
 }
+
+.messages.success {
+    background-color: #0dcc36;
+    top: 0;
+}

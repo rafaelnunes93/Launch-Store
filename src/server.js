@@ -7,6 +7,12 @@ const methodOverrride = require('method-override')
 
 
 server.use(session)
+server.use((req,res,next)=>{
+    res.locals.session = req.session
+    next()
+})
+
+
 // responsavel por funcionar o req body
 server.use(express.urlencoded({extended:true}))
 //usar arquivos estaticos
