@@ -5,7 +5,7 @@ module.exports = {
     registerForm(req, res){
 
        
-
+        console.log("Formulario")
         return res.render("user/register")
     },
     async show(req, res){
@@ -52,6 +52,23 @@ module.exports = {
             console.error(error)
             return res.render("user/index",{
                 error:"Algum erro aconteceu!"
+            })
+        }
+    },
+    async delete(req,res){
+        try {
+            await User.delete(req.body.id)
+            req.session.destroy()
+
+            return res.render("session/login",{
+                success: "Conta deletada com sucesso!"
+            })
+
+        } catch (err) {
+            console.error(err)
+            return res.render("user/index",{
+                user: req.body,
+                error:"Erro ao deletar sua conta"
             })
         }
     }
