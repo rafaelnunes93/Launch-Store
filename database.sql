@@ -105,3 +105,13 @@ ADD CONSTRAINT files_product_id_fkey
 FOREIGN KEY ("product_id")
 REFERENCES "products" ("id")
 ON DELETE CASCADE;
+
+
+
+Delete from products;
+Delete from users;
+delete from files;
+
+alter sequence products_id_seq Restart with 1;
+alter sequence users_id_seq Restart with 1;
+alter sequence files_id_seq Restart with 1;

@@ -11,7 +11,7 @@ module.exports = {
   async files(id){
     const results = await db.query(`
         SELECT * FROM files WHERE product_id = $1
-    `, [id])
+    `, [id]);
 
     return results.rows
 },

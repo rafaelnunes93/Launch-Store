@@ -39,9 +39,9 @@ module.exports = {
 
             price = price.replace(/\D/g, "");
 
-            const product_id = await Product.create({
+            const product_idproduct_id = await Product.create({
                 Category_id,
-                user_id,
+                user_id: req.session.userId,
                 name,
                 description,
                 old_price: old_price || price,
@@ -51,19 +51,15 @@ module.exports = {
             })
 
 
-            const filesPromise = req.files.map(file => File.create({
-                ...file, product_id
-            }))
+            const filesPromise = req.files.map(file =>
+                 File.create({...file, product_id  }))
             await Promise.all(filesPromise)
 
-            return res.redirect(`/products/${productId}`)
+            return res.redirect(`/products/${product_id}/edit`)
 
         } catch (error) {
             console.error(error);
         }
-
-
-
     },
 
 
@@ -74,8 +70,6 @@ module.exports = {
             const product = await Product.find(req.params.id)
 
             if (!product) return res.send("product Not Found!")
-
-
 
             const { day, hour, minutes, month } = date(product.updated_at)
 
@@ -92,8 +86,6 @@ module.exports = {
                 ...file,
                 src: `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
             }))
-
-
             return res.render("products/show", { product, files })
 
         } catch (error) {
@@ -173,10 +165,11 @@ module.exports = {
         }
 
         await Product.update(req.body.id, {
-            Category_id:req.body.Category_id,
+            category_id:req.body.category_id,
             name:req.body.name,
             description:req.body.description,
             old_price:req.body.old_price,
+            price:req.body.price,
             quantity:req.body.quantity,
             status:req.body.status,
         })
@@ -184,20 +177,14 @@ module.exports = {
         return res.redirect(`/products/${req.body.id}`)
         } catch (error) {
             console.error(error);
-        }
-
-
-        
+        }       
 
     },
-
 
     async delete(req, res) {
         await Product.delete(req.body.id)
 
         return res.redirect('/products/create')
     }
-
-
 
 }

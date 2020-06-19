@@ -61,9 +61,7 @@ module.exports = {
                     
                     </p>
                 `,
-            })
-
-            
+            })            
 
             //avisar ao usuario que o email foi enviado
 

@@ -8,9 +8,6 @@ const  {formatCpfCnpj,formatCep} = require('../../lib/utils');
 
 module.exports = {
     registerForm(req, res){
-
-       
-        console.log("Formulario")
         return res.render("user/register")
     },
     async show(req, res){
@@ -85,6 +82,7 @@ module.exports = {
             })
         }
     },
+    
     async delete(req,res){
         try {
 
