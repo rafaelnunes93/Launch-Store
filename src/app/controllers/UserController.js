@@ -88,7 +88,7 @@ module.exports = {
 
             const products = await Product.findAll({where: {user_id: req.body.id}})
 
-              //pegar todas as imagens dos produtos
+        //pegar todas as imagens dos produtos
         const allFilesPromise = products.map(product =>
         Product.files(product.id))
 

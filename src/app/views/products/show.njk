@@ -5,14 +5,14 @@
     <section class="product-single container">
         <div class="gallery">
             <div class="highlight">
-                {% if not files[0] %}
+                {% if not product.files[0] %}
                     <img src="http://placehold.it/500x500?text=Produto sem foto" alt="">
                 {%else %}
-                    <img src="{{files[0].src}}" alt="{{files[0].name}}" onclick="LightBox.open()">
+                    <img src="{{product.files[0].src}}" alt="{{product.files[0].name}}" onclick="LightBox.open()">
                  {%endif%}
 
                 <div class="lightbox-target">
-                    <img src="{{files[0].src}}" alt="{{files[0].name}}">
+                    <img src="{{product.files[0].src}}" alt="{{product.files[0].name}}">
                     <a href="#" class="lightbox-close" onclick="LightBox.close()">
                         <i class="material-icons">close</i>
                     </a>
@@ -20,7 +20,7 @@
 
             </div>
             <div class="gallery-preview">
-                {%for image in files%}
+                {%for image in product.files%}
                     <img 
                         src="{{image.src}}" 
                         alt="{{image.name}}"
@@ -47,10 +47,10 @@
 
             <div class="price-buy">
                 <div class="price">
-                    {{product.price}}
+                    {{product.formattedPrice}}
 
-                    {%if product.price !== product.oldPrice %}
-                        <span class="old">{{product.oldPrice}}</span>
+                    {%if product.formattedPrice !== product.formattedOldPrice %}
+                        <span class="old">{{product.formattedOldPrice}}</span>
                     {% endif%}
 
                 </div>

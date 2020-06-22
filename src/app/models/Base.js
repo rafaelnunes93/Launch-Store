@@ -73,7 +73,7 @@ const Base = {
 
             Object.keys(fields).map(key => {
 
-                const line = `${key} = '${fiels[key]}'`
+                const line = `${key} = '${fields[key]}'`
                 update.push(line)
               
             })
@@ -85,7 +85,7 @@ const Base = {
             return db.query(query)
 
         } catch (error) {
-            Console.error(error)
+            console.error(error)
         }
 
 
