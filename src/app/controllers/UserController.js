@@ -1,10 +1,12 @@
 const {unlinkSync} = require('fs')
 const {hash} = require('bcryptjs');
+const LoadProductsServices = require("../services/LoadProductService")
 
 const User = require('../models/User');
 const Product = require('../models/Product');
 
 const  {formatCpfCnpj,formatCep} = require('../../lib/utils');
+const { addListener } = require('process');
 
 module.exports = {
     registerForm(req, res){
@@ -123,5 +125,12 @@ module.exports = {
                 error:"Erro ao deletar sua conta"
             })
         }
+    },
+    async ads(req, res){
+        const products = await LoadProductsServices.load('products',{
+            where: {user_id: req.session.userId}
+        })
+
+        return res.render("user/ads", {products});
     }
 }

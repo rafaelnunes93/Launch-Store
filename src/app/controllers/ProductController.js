@@ -83,7 +83,7 @@ module.exports = {
 
         try {
 
-            const product = await LoadProductsServices.load('product',{
+            const product = await LoadProductService.load('product',{
                 where:{
                     id:req.params.id
                 }
@@ -104,14 +104,7 @@ module.exports = {
     async put(req, res) {
 
         try {
-            const keys = Object.keys(req.body)
-
-        // for(key of keys){
-        //     if(req.body[key] == "" && key != "removed_files"){
-        //         return res.send('Please, fill all fields!')
-        //     }
-        // }
-
+            
         if (req.files.length != 0) {
             const newFilesPromise = req.files.map(file =>
                 File.create({ ...file, product_id: req.body.id })
